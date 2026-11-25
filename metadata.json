@@ -1,0 +1,10 @@
+{
+  "name": "ALUMNI KTD - Mạng Lưới Cựu Sinh Viên Kiến Trúc Đà Nẵng",
+  "description": "Cổng thông tin chính thức kết nối Mạng lưới Cựu sinh viên ALUMNI KTD, Ban Điều hành, Cộng đồng Doanh nghiệp và Theo dòng Sự kiện.",
+  "requestFramePermissions": [
+    "allow-popups",
+    "allow-popups-to-escape-sandbox",
+    "allow-same-origin"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

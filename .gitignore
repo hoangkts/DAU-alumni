@@ -1,0 +1,17 @@
+node_modules/
+build/
+dist/
+dist-server/
+coverage/
+uploads/
+pgdata/
+backups/
+.aistudio/
+.DS_Store
+*.log
+.env*
+!.env.example
+firebase-applet-config.json
+firebase-blueprint.json
+firestore.rules
+security_spec.md

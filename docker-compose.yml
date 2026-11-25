@@ -1,0 +1,42 @@
+services:
+  alumni-ktd-db:
+    image: postgres:17-alpine
+    container_name: alumni-ktd-db
+    restart: unless-stopped
+    mem_limit: 512m
+    env_file:
+      - .env
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-alumni_ktd} -d ${POSTGRES_DB:-alumni_ktd}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - alumni_internal
+
+  alumni-ktd-app:
+    build: .
+    container_name: alumni-ktd-app
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4395:3000"
+    mem_limit: 512m
+    volumes:
+      - ./uploads:/app/uploads
+    env_file:
+      - .env
+    depends_on:
+      alumni-ktd-db:
+        condition: service_healthy
+    networks:
+      - alumni_internal
+      - shared_net
+
+networks:
+  alumni_internal:
+    driver: bridge
+  shared_net:
+    external: true

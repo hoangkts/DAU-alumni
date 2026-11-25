@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ALUMNI KTD - Mạng Lưới Cựu Sinh Viên Kiến Trúc Đà Nẵng</title>
+    <meta name="description" content="Cổng thông tin chính thức kết nối Mạng lưới Cựu sinh viên ALUMNI KTD, Ban Điều hành, Cộng đồng Doanh nghiệp và Theo dòng Sự kiện." />
+    <meta property="og:title" content="ALUMNI KTD - Mạng Lưới Cựu Sinh Viên Kiến Trúc Đà Nẵng" />
+    <meta property="og:description" content="Cổng thông tin chính thức kết nối Mạng lưới Cựu sinh viên ALUMNI KTD, Ban Điều hành, Cộng đồng Doanh nghiệp và Theo dòng Sự kiện." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content="/logo-dau.png" />
+    <link rel="icon" type="image/png" href="/logo-dau.png" />
+    <link rel="apple-touch-icon" href="/logo-dau.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap&subset=vietnamese" rel="stylesheet" />
+    <script>
+      (function() {
+        try {
+          var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+          var isAndroid = /Android/i.test(ua);
+          var isInApp = /FBAN|FBAV|Instagram|Line|Zalo|ZaloTheme|ZaloPC|MicroMessenger/i.test(ua);
+          if (isAndroid && isInApp && !window.location.hash.includes('no-intent')) {
+            var target = window.location.href.replace(/^https?:\/\//, '');
+            window.location.replace('intent://' + target + '#Intent;scheme=https;action=android.intent.action.VIEW;end');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-[#F8FAFC] text-[#0F172A] font-sans antialiased selection:bg-[#9E1B20] selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
