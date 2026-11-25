@@ -162,7 +162,10 @@ Dành cho tài khoản developer `anhnt` trên VPS (được phân quyền chỉ
 sudo alumni-ctl status
 sudo alumni-ctl health
 
-# Sau khi chỉnh sửa hoặc git pull mã nguồn mới trong /opt/alumni-ktd: rebuild & khởi động lại app
+# Kéo mã nguồn mới nhất từ GitHub (nhánh main), đồng bộ an toàn & rebuild tự động
+sudo alumni-ctl update
+
+# Hoặc rebuild & khởi động lại app từ mã nguồn đang có trong /opt/alumni-ktd
 sudo alumni-ctl deploy
 
 # Xem log ứng dụng / PostgreSQL
@@ -172,3 +175,18 @@ sudo alumni-ctl logs db 100
 # Sao lưu database thủ công (bản sao lưu tự động chạy mỗi ngày lúc 02:30 tại /opt/alumni-ktd/backups/)
 sudo alumni-ctl db-backup
 ```
+
+### Tự động Deploy qua GitHub Actions (`.github/workflows/deploy.yml`)
+
+Workflow CI/CD được cấu hình sẵn để chạy tự động mỗi khi có commit mới lên nhánh `main` (hoặc bấm **Run workflow** thủ công trong tab **Actions**):
+1. **Job `verify`:** cài dependencies (`npm ci`), kiểm tra TypeScript (`npm run lint`), chạy unit test (`npm test`) và build production (`npm run build`).
+2. **Job `deploy`:** nếu đã cấu hình đủ Repository Secrets, workflow sẽ đồng bộ các thư mục/tệp mã nguồn ứng dụng qua SSH + `rsync` (không ghi đè `.env`, `pgdata/`, `uploads/`, `docker-compose.yml`), chạy `sudo -n /usr/local/bin/alumni-ctl deploy` và kiểm tra `/api/health`.
+
+Để kích hoạt bước deploy tự động, quản trị viên vào **Settings → Secrets and variables → Actions** trên GitHub repository và thêm các Repository Secrets sau:
+
+| Tên Secret | Mô tả | Bắt buộc |
+| :--- | :--- | :--- |
+| `VPS_HOST` | Địa chỉ IP hoặc hostname của VPS | Bắt buộc |
+| `VPS_USER` | Tên tài khoản SSH trên VPS được cấp quyền chạy `alumni-ctl` | Bắt buộc |
+| `VPS_SSH_KEY` | Nội dung SSH Private Key (`ed25519`) tương ứng với public key đã cài trên VPS | Bắt buộc |
+| `VPS_PORT` | Cổng SSH của VPS (mặc định `22` nếu bỏ trống) | Tuỳ chọn |
